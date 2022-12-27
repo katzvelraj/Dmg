@@ -5,6 +5,7 @@ import Header from './Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNews, selectCurrentPage, selectIsloading, selectNews, selectIsError, selectIsFetchingNextPage } from '../redux/NewsState';
 import { Colors } from '../res/Colors';
+import { strings } from '../res/strings';
 
 
 
@@ -15,7 +16,7 @@ const HomeScreen = () => {
   const currentPage = useSelector(selectCurrentPage)
   const isLoading = useSelector(selectIsloading)
   const isError = useSelector(selectIsError)
-  const isFetchingNextPage = useSelector(selectIsFetchingNextPage)
+  const isFetchingNextItems = useSelector(selectIsFetchingNextPage)
 
   useEffect(() => {
     dispatch(getNews(currentPage));
@@ -23,25 +24,18 @@ const HomeScreen = () => {
 
 
 
-  const loadNext = () => {
-    if (!isLastPage()) {
-      dispatch(getNews(currentPage));
-    }
+  const loadNextItems = () => {
+    dispatch(getNews(currentPage));
   };
-  const isLastPage = () => {
-    return newsList.length < 10
-  }
 
-  const renderLoadingIndicator = () => {
-    return <ActivityIndicator style={{
-      flex: 1,
-      justifyContent: "center", padding: 12
-    }} />;
+
+  const renderLoader = () => {
+    return <ActivityIndicator style={styles.fetchNextStyle} />;
   };
 
 
   const renderComponents = () => {
-    if (isLoading && !isFetchingNextPage) {
+    if (isLoading && !isFetchingNextItems) {
       return (
         <View style={[styles.container, styles.horizontal]}>
           <ActivityIndicator size='large' style={styles.loadingContainer}
@@ -52,8 +46,7 @@ const HomeScreen = () => {
     if (isError) {
       return (
         <View style={[styles.container, styles.horizontal]}>
-          <Text style={styles.errorStyle}>
-            An error occurred while fetching data
+          <Text style={styles.errorStyle}>{strings.errorMessage}
           </Text>
         </View>
       );
@@ -68,12 +61,11 @@ const HomeScreen = () => {
             renderItem={({ item, index }) => (
               <NewsItems article={item} index={index} grid={isGrid} />
             )}
-            onEndReached={loadNext}
+            onEndReached={loadNextItems}
             onEndReachedThreshold={0.3}
-            estimatedItemSize={50}
             numColumns={isGrid ? 2 : 1}
             key={isGrid ? '2' : '1'}
-            ListFooterComponent={isFetchingNextPage ? renderLoadingIndicator : null}
+            ListFooterComponent={isFetchingNextItems ? renderLoader : null}
           />)
           : null}
       </View>
@@ -113,6 +105,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10
+  },
+  fetchNextStyle:
+  {
+    flex: 1,
+    justifyContent: "center",
+    padding: 14
   }
 });
 

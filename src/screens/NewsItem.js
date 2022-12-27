@@ -4,11 +4,12 @@ import FastImage from 'react-native-fast-image';
 import { Colors } from '../res/Colors';
 import moment from 'moment';
 import LinearGradient from 'react-native-linear-gradient'
+import { utils } from '../res/utils';
 const NewsItems = ({ article, grid }) => {
   const date = moment(article?.pub_date).format('DD MMM');
   const url = article.multimedia?.[0]?.url
     ? `https://nytimes.com/${article.multimedia[0].url}`
-    : 'https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg';
+    : utils.defaultImageUrl;
 
   if (grid) {
     return (
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     borderRadius: 10,
     justifyContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
     alignSelf: 'center'
   },
   container: {

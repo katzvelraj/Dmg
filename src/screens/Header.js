@@ -1,14 +1,14 @@
-import { Appbar } from 'react-native-paper';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { strings } from '../res/strings';
 
 const Header = ({ isGrid, toggleLayout }) => {
     return (
         <View style={styles.rootContainerStyle}>
             <View style={styles.headerContainer}>
-                <Text style={styles.appHeaderStyle}>NewsFeed</Text>
+                <Text style={styles.appHeaderStyle}>{strings.title}</Text>
 
-                <Text onPress={toggleLayout} style={styles.toggleStyle}>{isGrid ? 'List' : 'Grid'}</Text>
+                <Text onPress={toggleLayout} style={styles.toggleStyle}>{isGrid ? strings.list : strings.grid}</Text>
             </View>
         </View>
     );
