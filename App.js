@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, StatusBar } from 'react-native';
+import {SafeAreaView, StyleSheet } from 'react-native';
 import {Provider as StoreProvider} from 'react-redux';
 import store from './src/redux/Store';
 import HomeScreen from './src/screens/HomeScreen';
@@ -11,9 +11,9 @@ const App = () => {
   return (
     <StoreProvider store={store}>
      <PersistGate  loading={null} persistor={persistor}>
-        <View style={styles.rootContainer}>
+        <SafeAreaView style={styles.rootContainer}>
          <HomeScreen/>
-        </View>
+        </SafeAreaView>
        </PersistGate>
     </StoreProvider>
   );
