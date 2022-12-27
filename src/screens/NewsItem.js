@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { Colors } from '../res/Colors';
+import {Colors} from '../res/Colors';
 import moment from 'moment';
-import LinearGradient from 'react-native-linear-gradient'
-import { utils } from '../res/utils';
-const NewsItems = ({ article, grid }) => {
+import LinearGradient from 'react-native-linear-gradient';
+import {utils} from '../res/utils';
+const NewsItems = ({article, grid}) => {
   const date = moment(article?.pub_date).format('DD MMM');
   const url = article.multimedia?.[0]?.url
     ? `https://nytimes.com/${article.multimedia[0].url}`
@@ -13,52 +13,34 @@ const NewsItems = ({ article, grid }) => {
 
   if (grid) {
     return (
-      <View
-        style={
-          styles.gridViewContainer
-        }>
+      <View style={styles.gridViewContainer}>
         <FastImage
-          source={{ uri: url }}
+          source={{uri: url}}
           style={styles.imageGrid}
           resizeMode={FastImage.resizeMode.cover}
         />
 
         <View style={styles.nameContainer}>
-          <Text
-            style={styles.dateStyle}>
-            {date}
-          </Text>
-          <Text
-            style={
-              styles.titleStyle
-            }>
-            {article.headline.main}
-          </Text>
-          <Text
-            style={
-              styles.snippetStyle
-            }>
-            {article?.abstract}
-          </Text>
+          <Text style={styles.dateStyle}>{date}</Text>
+          <Text style={styles.titleStyle}>{article.headline.main}</Text>
+          <Text style={styles.snippetStyle}>{article?.abstract}</Text>
         </View>
       </View>
     );
   }
 
   return (
-
-
     <TouchableOpacity activeOpacity={1} style={styles.container}>
       <FastImage
-        source={{ uri: url }}
+        source={{uri: url}}
         style={styles.image}
         resizeMode={FastImage.resizeMode.stretch}
       />
-      <LinearGradient colors={[Colors.start, Colors.middle, Colors.end]} style={styles.titleContainer}>
+      <LinearGradient
+        colors={[Colors.start, Colors.middle, Colors.end]}
+        style={styles.titleContainer}>
         <Text style={styles.text}>{article.headline.main}</Text>
-        <Text style={styles.timestamp}>
-          {date}
-        </Text>
+        <Text style={styles.timestamp}>{date}</Text>
       </LinearGradient>
     </TouchableOpacity>
   );
@@ -66,22 +48,21 @@ const NewsItems = ({ article, grid }) => {
 
 const styles = StyleSheet.create({
   nameContainer: {
-    paddingHorizontal: 6
+    paddingHorizontal: 6,
   },
   nameTxt: {
     fontSize: 18,
   },
   dateStyle: {
-    color: Colors.secondaryText
+    color: Colors.secondaryText,
   },
   titleStyle: {
     fontSize: 14,
-    color: Colors.text
+    color: Colors.text,
   },
   snippetStyle: {
     fontSize: 14,
-    color: Colors.text
-
+    color: Colors.text,
   },
   gridViewContainer: {
     flex: 1,
@@ -90,7 +71,7 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     backgroundColor: Colors.gridBackgroundColor,
     borderRadius: 8,
-    paddingVertical: 8
+    paddingVertical: 8,
   },
   imageGrid: {
     width: '90%',
@@ -100,7 +81,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   container: {
     height: 240,
