@@ -4,7 +4,7 @@
 git clone https://github.com/katzvelraj/Dmg.git
 
 # Go into the repository
-cd recert-me
+cd dmg
 
 # Install dependencies
 npm install
