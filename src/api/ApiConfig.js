@@ -1,6 +1,7 @@
 import axios from 'axios';
+import{BASE_URL} from '@env'
 //
 const axiosInstance = axios.create({
-  baseURL: 'https://api.nytimes.com/svc/search/v2',
+  baseURL: BASE_URL,
 });
 export default axiosInstance;
