@@ -1,7 +1,6 @@
 import axios from 'axios';
-import {BASE_URL} from '@env';
-
+import {utils} from './../res/utils';
 const axiosInstance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: utils.BASE_URL,
 });
 export default axiosInstance;
