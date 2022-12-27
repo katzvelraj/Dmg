@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { utils } from '../res/utils';
 
 export const newsState = createSlice({
-  name: 'news',
+  name: utils.reducerName,
   initialState: {
     isLoading: true,
     newsList: [],

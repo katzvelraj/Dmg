@@ -4,11 +4,12 @@ import rootSagas from '../sagas/index';
 import newsReducer from './NewsState'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer } from 'redux-persist'
+import { utils } from '../res/utils';
 
 const persistConfig = {
-  key: 'root',
+  key: utils.rootKey,
   storage: AsyncStorage,
-  whitelist:['news']
+  whitelist:[utils.reducerName]
 }
 const reducer = combineReducers({
   news: newsReducer,
